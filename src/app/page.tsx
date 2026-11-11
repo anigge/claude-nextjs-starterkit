@@ -1,68 +1,62 @@
-import Image from "next/image";
+import { Code2, Layers, Palette, Smartphone } from "lucide-react";
 
-export default function Home() {
+import { FeatureCard } from "@/components/home/feature-card";
+import { SiteHeader } from "@/components/layout/site-header";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+
+const features = [
+  {
+    icon: Code2,
+    title: "TypeScript",
+    description: "타입 안정성을 갖춘 Next.js 15 App Router 기반 개발 환경입니다.",
+  },
+  {
+    icon: Palette,
+    title: "Tailwind CSS v4",
+    description: "tailwind.config 없이 CSS에서 테마를 정의하는 최신 설정입니다.",
+  },
+  {
+    icon: Layers,
+    title: "shadcn/ui",
+    description: "복사해서 쓰는 접근성 높은 컴포넌트를 필요한 만큼만 추가합니다.",
+  },
+  {
+    icon: Smartphone,
+    title: "반응형 레이아웃",
+    description: "모바일부터 데스크톱까지 자연스럽게 대응하는 구조를 제공합니다.",
+  },
+];
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <div className="flex min-h-screen flex-col">
+      <SiteHeader />
+
+      <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-16">
+        <section className="flex flex-col items-center gap-6 text-center">
+          <h1 className="text-3xl font-bold tracking-tight sm:text-5xl">
+            웹 개발을 빠르게 시작하세요
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="max-w-xl text-base text-muted-foreground sm:text-lg">
+            Next.js, TypeScript, Tailwind CSS, shadcn/ui가 미리 설정된 스타터킷입니다.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+          <form className="flex w-full max-w-md flex-col gap-2 sm:flex-row">
+            <Input type="email" placeholder="이메일을 입력하세요" aria-label="이메일" />
+            <Button type="submit">구독하기</Button>
+          </form>
+        </section>
+
+        <section className="mt-16 grid gap-4 sm:grid-cols-2">
+          {features.map((feature) => (
+            <FeatureCard
+              key={feature.title}
+              icon={feature.icon}
+              title={feature.title}
+              description={feature.description}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+          ))}
+        </section>
       </main>
     </div>
   );
